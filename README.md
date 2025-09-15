@@ -1,1 +1,1 @@
-# veri-ekme
+# harmony ile veri cekme
