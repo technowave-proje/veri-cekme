@@ -1,1 +1,1 @@
-# harmony ile veri cekme
+# harmony ile veri cekme-openweather verileri
