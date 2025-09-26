@@ -2,8 +2,21 @@ import requests
 import mysql.connector
 from datetime import datetime
 import time
+import os 
+from dotenv import load_dotenv
 
-API_KEY = "7304163140f3757aba23c36eb573d9ec"
+load_dotenv()  
+
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_USER = os.getenv("DB_USER", "root")
+DB_PASS = os.getenv("DB_PASS")
+DB_NAME = os.getenv("DB_NAME", "openweather")
+
+if not API_KEY:
+    raise RuntimeError("OPENWEATHER_API_KEY bulunamadı. .env veya ortam değişkenlerini kontrol et.")
+if DB_PASS is None:
+    raise RuntimeError("DB_PASS bulunamadı. .env veya ortam değişkenlerini kontrol et.")
 
 states = [
     # --- ABD 50 eyalet ---
@@ -110,10 +123,10 @@ states = [
 
 # MySQL bağlantısı
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="Ankara10.",
-    database="openweather"
+    host=DB_HOST,
+    user=DB_USER,
+    password=DB_PASS,
+    database=DB_NAME
 )
 cursor = db.cursor()
 
